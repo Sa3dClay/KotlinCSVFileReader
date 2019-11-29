@@ -5,11 +5,11 @@ import java.io.FileReader
 import java.io.IOException
 
 class CSVReader {
-
-    fun readCSV(path: String): Array<String> {
-        var data = arrayOf<String>()
+    
+    fun readCSV(path: String): List<String> {
+        var data = listOf<String>()
         var fileReader: BufferedReader? = null
-
+        
         try {
             var line: String?
             fileReader = BufferedReader(FileReader(path))
@@ -17,10 +17,9 @@ class CSVReader {
             fileReader.readLine()
             // Read the file line by line starting from the second line
             line = fileReader.readLine()
-
+            
             while (line != null) {
                 val tokens = line.split(",")
-
                 if (tokens.isNotEmpty()) {
                     println(tokens)
                     data = data.plus(tokens)
@@ -29,6 +28,7 @@ class CSVReader {
             }
         } catch (e: Exception) {
             println("Reading CSV Error!: $e")
+            
         } finally {
             try {
                 fileReader?.close()
@@ -36,8 +36,8 @@ class CSVReader {
                 println("Closing fileReader Error!: $e")
             }
         }
-
+        
         return data
     }
-
+    
 }
